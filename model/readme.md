@@ -1,15 +1,4 @@
 
-Input:
-
-create a python script that sets up a baic CI/CD pipeline for a machine learning project. Include automated testing for an
-ML model, model validation checks, and a simple automated deployment process. I want you to make 3 layer DNN (Using convolutions
-and fully connected layer), use MNIST as dataset (download if required), and train only for 1 epoch. When you test, mention
-what testa you are checking for. I would like to check if model is under 100000 parammeters, take 28x28 input without any issues,
-has 10 output and accuraciy is more than 70%. Make all the necessary files ( for training as well as github actions related).
-Finally I should be able to confirm the build was successful. Tell me steps to run locally as well before i push to github. For deployment, add suffix to model
-file to get some details on when it was trained. Add gitignore files to ignore data and setting to upload.
-
-
 Steps to run locally before pushing to GitHub:
 1. Create a virtual environment and activate it:
 python -m venv venv
