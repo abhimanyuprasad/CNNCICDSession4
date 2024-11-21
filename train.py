@@ -26,6 +26,7 @@ def train():
     
     # Train for 1 epoch
     model.train()
+    
     for batch_idx, (data, target) in enumerate(train_loader):
         data, target = data.to(device), target.to(device)
         optimizer.zero_grad()

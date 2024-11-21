@@ -25,6 +25,7 @@ def test_model_architecture():
 
 def test_model_accuracy():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(device)
     model = SimpleCNN().to(device)
     
     # Load the latest model
@@ -56,4 +57,5 @@ def test_model_accuracy():
             correct += (predicted == target).sum().item()
     
     accuracy = 100 * correct / total
-    assert accuracy > 70, f"Accuracy is {accuracy}%, should be above 70%" 
+    
+    assert accuracy > 95, f"Accuracy is {accuracy}%, should be above 95%" 
