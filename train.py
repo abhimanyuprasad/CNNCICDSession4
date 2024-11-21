@@ -10,10 +10,13 @@ def train():
     # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
-    # Load MNIST dataset
+    # Enhanced data augmentation
     transform = transforms.Compose([
+        transforms.RandomAffine(degrees=5, translate=(0.05, 0.05), scale=(0.95, 1.05)),
+        transforms.RandomRotation(5),
         transforms.ToTensor(),
-        transforms.Normalize((0.1307,), (0.3081,))
+        transforms.Normalize((0.1307,), (0.3081,)),
+        transforms.RandomErasing(p=0.1, scale=(0.02, 0.1))
     ])
     
     train_dataset = datasets.MNIST('./data', train=True, download=True, transform=transform)
@@ -42,7 +45,12 @@ def train():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     save_path = f'models/model_{timestamp}.pth'
     os.makedirs('models', exist_ok=True)
-    torch.save(model.state_dict(), save_path)
+    torch.save({
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'loss': loss.item(),
+        'timestamp': timestamp
+    }, save_path)
     print(f"Model saved as {save_path}")
 
 if __name__ == "__main__":
