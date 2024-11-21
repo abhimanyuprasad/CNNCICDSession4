@@ -23,7 +23,7 @@ The tests will check for:
 Model parameter count (< 100,000)
 Input shape compatibility (28x28)
 Output shape (10 classes)
-Model accuracy (> 70%)
+Model accuracy (> 95%)
 When you push to GitHub, the Actions workflow will:
 
 Set up a Python environment
