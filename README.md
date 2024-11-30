@@ -54,5 +54,7 @@ Numerical stability of the network
 Proper gradient flow during training
 No vanishing/exploding gradient issues
 
+Added feature to show 10 augmented image
+
 
 
