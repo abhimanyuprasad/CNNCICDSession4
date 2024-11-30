@@ -5,6 +5,28 @@ from torchvision import datasets, transforms
 from model.network import SimpleCNN
 from datetime import datetime
 import os
+import matplotlib.pyplot as plt
+
+def show_augmented_images(data_loader):
+    # Get a batch of images
+    images, labels = next(iter(data_loader))
+    
+    # Create a figure with 10 subplots
+    fig, axes = plt.subplots(2, 5, figsize=(15, 6))
+    axes = axes.ravel()
+    
+    # Plot 10 images
+    for idx in range(10):
+        axes[idx].imshow(images[idx].squeeze(), cmap='gray')
+        axes[idx].axis('off')
+        axes[idx].set_title(f'Label: {labels[idx]}')
+    
+    plt.suptitle('Augmented MNIST Images')
+    
+    # Create directory for visualizations if it doesn't exist
+    os.makedirs('visualizations', exist_ok=True)
+    plt.savefig('visualizations/augmented_images.png')
+    plt.close()
 
 def train():
     # Set device
@@ -21,6 +43,10 @@ def train():
     
     train_dataset = datasets.MNIST('./data', train=True, download=True, transform=transform)
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True)
+    
+    # Show augmented images from first batch
+    show_augmented_images(train_loader)
+    print("Augmented images have been saved to 'visualizations/augmented_images.png'")
     
     # Initialize model
     model = SimpleCNN().to(device)
